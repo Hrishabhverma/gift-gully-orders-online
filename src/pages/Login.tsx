@@ -74,9 +74,6 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <p className="text-xs text-muted-foreground pt-1">
-                  Use email: admin@giftgully.com and password: admin123
-                </p>
               </div>
             </CardContent>
             <CardFooter>

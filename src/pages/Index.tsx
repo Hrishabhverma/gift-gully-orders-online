@@ -40,6 +40,9 @@ export default function Index() {
           <p className="text-center text-gray-600">
             © {new Date().getFullYear()} Gift Gully. All rights reserved.
           </p>
+          <p className="text-center text-gray-600 mt-2">
+            For Queries Contact: +91 9876543210
+          </p>
         </div>
       </footer>
     </div>

@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,7 +11,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose
 } from "@/components/ui/dialog";
 import { useOrders } from "@/contexts/OrderContext";
 import { Product } from "@/types";
@@ -28,7 +27,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [contactNumber, setContactNumber] = useState("");
   const [feedback, setFeedback] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [qrVisible, setQrVisible] = useState(false);
+  const [orderDialogOpen, setOrderDialogOpen] = useState(false);
+  const [qrDialogOpen, setQrDialogOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,6 +49,9 @@ export default function ProductCard({ product }: ProductCardProps) {
     setContactNumber("");
     setFeedback("");
     setIsSubmitting(false);
+    
+    // Close the dialog
+    setOrderDialogOpen(false);
   };
 
   return (
@@ -74,7 +77,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       <CardFooter className="flex flex-col space-y-2 p-4 pt-0">
         {/* QR Code Dialog */}
-        <Dialog>
+        <Dialog open={qrDialogOpen} onOpenChange={setQrDialogOpen}>
           <DialogTrigger asChild>
             <Button variant="outline" className="w-full">View Payment QR</Button>
           </DialogTrigger>
@@ -92,7 +95,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </Dialog>
 
         {/* Order Dialog */}
-        <Dialog>
+        <Dialog open={orderDialogOpen} onOpenChange={setOrderDialogOpen}>
           <DialogTrigger asChild>
             <Button className="w-full">Place Order</Button>
           </DialogTrigger>
@@ -144,14 +147,16 @@ export default function ProductCard({ product }: ProductCardProps) {
               </div>
 
               <div className="flex justify-between pt-4">
-                <DialogClose asChild>
-                  <Button type="button" variant="outline">Cancel</Button>
-                </DialogClose>
-                <DialogClose asChild>
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "Processing..." : "Submit Order"}
-                  </Button>
-                </DialogClose>
+                <Button 
+                  type="button" 
+                  variant="outline"
+                  onClick={() => setOrderDialogOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "Processing..." : "Submit Order"}
+                </Button>
               </div>
             </form>
           </DialogContent>

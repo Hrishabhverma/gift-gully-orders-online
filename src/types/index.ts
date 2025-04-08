@@ -9,11 +9,14 @@ export interface Product {
 }
 
 export interface Order {
+  id: string;
   productId: string;
   name: string;
   hostelName: string;
   contactNumber: string;
   feedback: string;
+  createdAt: string;
+  productName: string;
 }
 
 export interface User {

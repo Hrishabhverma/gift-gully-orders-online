@@ -41,7 +41,7 @@ export default function Index() {
             © {new Date().getFullYear()} Gift Gully. All rights reserved.
           </p>
           <p className="text-center text-gray-600 mt-2">
-            For Queries Contact: +91 9876543210
+            For Queries Contact: +91 8269679726
           </p>
         </div>
       </footer>

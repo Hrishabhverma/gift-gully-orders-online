@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 export default defineConfig({
-  base: "/gift-gully-orders-online/", // Base path for deployment
+  base: "/", // Base path for deployment
   build: {
     outDir: "dist", // Output directory
     emptyOutDir: true, // Clear the output directory before building

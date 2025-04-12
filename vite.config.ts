@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
   // Base path for GitHub Pages deployment
   base: "/gift-gully-orders-online/",
   server: {
-    host: "::", // Bind to all IPv6 and IPv4 addresses (can be changed to "0.0.0.0" if needed)
+    host: "0.0.0.0", // Bind to all IPv4 and IPv6 addresses (for better compatibility)
     port: 8080, // Development server port
   },
   plugins: [
@@ -24,5 +24,13 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: "dist", // Ensure outputs go to the "dist" directory
     emptyOutDir: true, // Clear the output directory before building
+    rollupOptions: {
+      // Ensure proper handling of hashed assets
+      output: {
+        assetFileNames: "assets/[name].[hash][extname]",
+        chunkFileNames: "assets/[name].[hash].js",
+        entryFileNames: "assets/[name].[hash].js",
+      },
+    },
   },
 }));
